@@ -9,6 +9,12 @@
     <Authors>Adam O'Neil</Authors>
     <Copyright>Copyright (c) 2023 Adam O'Neil</Copyright>
     <Nullable>enable</Nullable>
+	<IncludeSymbols>true</IncludeSymbols>
+	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<RepositoryUrl>https://github.com/adamfoneil/SimpleCrud</RepositoryUrl>
+	<PackageProjectUrl>https://github.com/adamfoneil/SimpleCrud</PackageProjectUrl>
+	<Description>SQL Server crud statement builder static methods</Description>
   </PropertyGroup>
 
 </Project>
