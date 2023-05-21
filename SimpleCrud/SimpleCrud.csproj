@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net6.0</TargetFramework>
+    <PackageId>AO.SimpleCrud</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Simple Crud Extensions</Title>
+    <Version>1.0.0</Version>
+    <Authors>Adam O'Neil</Authors>
+    <Copyright>Copyright (c) 2023 Adam O'Neil</Copyright>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
