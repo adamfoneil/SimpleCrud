@@ -47,11 +47,32 @@ public class SqlStatements
     }
 
     [TestMethod]
+    public void InsertGenericWithOverride()
+    {
+        var result = SqlServer.Insert<SampleEntity>("dbo.Hello");
+        Assert.IsTrue(result.Equals(
+            @"INSERT INTO [dbo].[Hello] (
+                [Name], [Description]
+            ) VALUES (
+                @Name, @Description
+            ); SELECT SCOPE_IDENTITY()"));
+    }
+
+    [TestMethod]
     public void UpdateGeneric()
     {
         var result = SqlServer.Update<SampleEntity>();
         Assert.IsTrue(result.Equals(
             @"UPDATE [whatever].[Sample] SET [Name]=@Name, [Description]=@Description
+            WHERE [Id]=@Id"));
+    }
+
+    [TestMethod]
+    public void UpdateGenericWithOverride()
+    {
+        var result = SqlServer.Update<SampleEntity>("dbo.Hello");
+        Assert.IsTrue(result.Equals(
+            @"UPDATE [dbo].[Hello] SET [Name]=@Name, [Description]=@Description
             WHERE [Id]=@Id"));
     }
 

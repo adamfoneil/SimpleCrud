@@ -13,8 +13,10 @@ public static partial class SqlServer
 {
     public const string DefaultIdentityCol = "Id";
 
-    private static (string Schema, string Name) ParseTableName<T>()
+    private static (string Schema, string Name) ParseTableName<T>(string? tableName = null)
     {
+        if (!string.IsNullOrWhiteSpace(tableName)) return ParseSchemaAndName(tableName);
+
         var schema = "dbo";
         var name = typeof(T).Name;
 
@@ -34,24 +36,33 @@ public static partial class SqlServer
         return (schema, name);
     }
 
-    public static string Insert<T>(Func<PropertyInfo, ColumnMapping>? mappingConvention = null)
+    private static (string Schema, string Name) ParseSchemaAndName(string objectName)
+    {
+        var parts = objectName.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+        return
+            (parts.Length == 1) ? ("dbo", objectName) :
+            (parts.Length == 2) ? (parts[0], parts[1]) :
+            throw new Exception($"Unexpected name format: {objectName}");
+    }
+
+    public static string Insert<T>(string? tableName = null, Func<PropertyInfo, ColumnMapping>? mappingConvention = null)
     {
         var mappings = GetColumnMappings<T>(mappingConvention ?? DefaultColumnMapping);
-        var table = ParseTableName<T>();
+        var table = ParseTableName<T>(tableName);
         return Insert(table.Schema, table.Name, mappings);
     }
 
-    public static string Update<T>(Func<PropertyInfo, ColumnMapping>? mappingConvention = null) 
+    public static string Update<T>(string? tableName = null, Func<PropertyInfo, ColumnMapping>? mappingConvention = null) 
     {
         var mappings = GetColumnMappings<T>(mappingConvention ?? DefaultColumnMapping);
-        var table = ParseTableName<T>();
+        var table = ParseTableName<T>(tableName);
         return Update(table.Schema, table.Name, mappings);
     }
 
-    public static string Delete<T>(Func<PropertyInfo, ColumnMapping>? mappingConvention = null) 
+    public static string Delete<T>(string? tableName = null, Func<PropertyInfo, ColumnMapping>? mappingConvention = null) 
     {
         var mappings = GetColumnMappings<T>(mappingConvention ?? DefaultColumnMapping);
-        var table = ParseTableName<T>();
+        var table = ParseTableName<T>(tableName);
         return Delete(table.Schema, table.Name, mappings);
     }
 

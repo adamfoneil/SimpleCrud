@@ -5,7 +5,7 @@
     <PackageId>AO.SimpleCrud</PackageId>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Simple Crud Extensions</Title>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Adam O'Neil</Authors>
     <Copyright>Copyright (c) 2023 Adam O'Neil</Copyright>
     <Nullable>enable</Nullable>
